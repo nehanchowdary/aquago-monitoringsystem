@@ -32,6 +32,9 @@ const Footer = () => (
         <p className="mt-1 text-xs text-muted-foreground">
           © {new Date().getFullYear()} AquaGo. Built for farmers, powered by innovation.
         </p>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Designed by M.Nehan Chowdary, T.Akshitha, T.Manjusha
+        </p>
       </div>
     </div>
   </footer>
