@@ -24,8 +24,11 @@
     --muted: 210 30% 95%;
     --muted-foreground: 207 20% 46%;
 
-    --accent: 134 61% 41%;
+    --accent: 170 77% 43%;
     --accent-foreground: 0 0% 100%;
+
+    --success: 134 61% 41%;
+    --success-foreground: 0 0% 100%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
@@ -39,7 +42,7 @@
     --danger: 0 72% 51%;
     --danger-foreground: 0 0% 100%;
 
-    --border: 207 30% 88%;
+    --border: 207 30% 90%;
     --input: 207 30% 88%;
     --ring: 207 87% 33%;
 
@@ -68,8 +71,10 @@
     --secondary-foreground: 210 40% 90%;
     --muted: 207 25% 16%;
     --muted-foreground: 207 15% 60%;
-    --accent: 134 50% 35%;
+    --accent: 170 60% 38%;
     --accent-foreground: 0 0% 100%;
+    --success: 134 50% 35%;
+    --success-foreground: 0 0% 100%;
     --destructive: 0 62% 40%;
     --destructive-foreground: 0 0% 100%;
     --border: 207 25% 20%;
@@ -100,11 +105,11 @@
 @layer utilities {
   .text-gradient-primary {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(207, 87%, 33%), hsl(207, 70%, 50%));
+    background-image: linear-gradient(135deg, hsl(207, 87%, 33%), hsl(170, 77%, 43%));
   }
 
   .bg-gradient-hero {
-    background: linear-gradient(135deg, hsl(207, 87%, 33%) 0%, hsl(207, 70%, 45%) 50%, hsl(180, 50%, 40%) 100%);
+    background: linear-gradient(135deg, hsl(207, 87%, 20%) 0%, hsl(207, 70%, 30%) 40%, hsl(170, 50%, 30%) 100%);
   }
 
   .bg-gradient-safe {
@@ -119,8 +124,12 @@
     background: linear-gradient(135deg, hsl(0, 72%, 51%), hsl(0, 60%, 58%));
   }
 
+  .bg-gradient-section {
+    background: linear-gradient(180deg, hsl(210, 60%, 98%) 0%, hsl(207, 50%, 95%) 100%);
+  }
+
   .card-glow {
-    box-shadow: 0 4px 24px -4px hsl(207 87% 33% / 0.12);
+    box-shadow: 0 4px 24px -4px hsl(207 87% 33% / 0.08), 0 1px 3px hsl(207 30% 50% / 0.06);
   }
 
   .card-glow-safe {
@@ -134,4 +143,43 @@
   .card-glow-danger {
     box-shadow: 0 4px 24px -4px hsl(0 72% 51% / 0.2);
   }
+
+  .card-glow-accent {
+    box-shadow: 0 4px 30px -4px hsl(170 77% 43% / 0.15);
+  }
+
+  .glass-card {
+    background: hsl(0 0% 100% / 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(207 30% 90% / 0.5);
+  }
+
+  .glow-dot {
+    box-shadow: 0 0 8px 2px currentColor;
+  }
+}
+
+/* Wave animation for hero */
+@keyframes wave-move {
+  0% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(-25%) translateY(2px); }
+  100% { transform: translateX(-50%) translateY(0); }
+}
+
+.animate-wave {
+  animation: wave-move 8s ease-in-out infinite;
+}
+
+.animate-wave-slow {
+  animation: wave-move 12s ease-in-out infinite reverse;
+}
+
+/* Count-up number animation */
+@keyframes number-pop {
+  0% { transform: scale(1.15); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-number-pop {
+  animation: number-pop 0.4s ease-out;
 }

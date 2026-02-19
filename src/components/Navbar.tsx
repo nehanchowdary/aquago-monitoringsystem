@@ -11,21 +11,19 @@ const navLinks = [
   { to: "/about", label: "About" },
 ];
 
-const languages = ["English", "తెలుగు", "हिंदी"];
-
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [lang, setLang] = useState(0);
   const location = useLocation();
 
   return (
-    <nav className="sticky top-0 z-50 border-b bg-card/80 backdrop-blur-lg">
+    <nav className="sticky top-0 z-50 border-b bg-card/80 backdrop-blur-xl">
       <div className="container flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
+        <Link to="/" className="flex items-center gap-2.5">
+          <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-primary shadow-md">
             <Droplets className="h-5 w-5 text-primary-foreground" />
+            <span className="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-accent glow-dot" />
           </div>
-          <span className="text-xl font-bold text-foreground">AquaGo</span>
+          <span className="text-xl font-extrabold text-foreground">AquaGo</span>
         </Link>
 
         {/* Desktop nav */}
@@ -34,9 +32,9 @@ const Navbar = () => {
             <Link
               key={link.to}
               to={link.to}
-              className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+              className={`rounded-lg px-3.5 py-2 text-sm font-medium transition-all ${
                 location.pathname === link.to
-                  ? "bg-primary text-primary-foreground"
+                  ? "bg-primary text-primary-foreground shadow-sm"
                   : "text-muted-foreground hover:bg-secondary hover:text-foreground"
               }`}
             >
@@ -46,12 +44,12 @@ const Navbar = () => {
         </div>
 
         <div className="hidden items-center gap-3 md:flex">
-          <button
-            onClick={() => setLang((l) => (l + 1) % languages.length)}
-            className="rounded-lg border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-secondary"
+          <Link
+            to="/dashboard"
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-bold text-accent-foreground shadow-sm transition-all hover:scale-105"
           >
-            🌐 {languages[lang]}
-          </button>
+            Live Dashboard
+          </Link>
         </div>
 
         {/* Mobile toggle */}
@@ -87,12 +85,13 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
-              <button
-                onClick={() => setLang((l) => (l + 1) % languages.length)}
-                className="mt-1 rounded-lg border px-3 py-2 text-left text-xs font-medium text-muted-foreground"
+              <Link
+                to="/dashboard"
+                onClick={() => setMobileOpen(false)}
+                className="mt-2 rounded-lg bg-accent px-3 py-2.5 text-center text-sm font-bold text-accent-foreground"
               >
-                🌐 {languages[lang]}
-              </button>
+                Live Dashboard
+              </Link>
             </div>
           </motion.div>
         )}
