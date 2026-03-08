@@ -33,7 +33,7 @@ const Footer = () => (
           © {new Date().getFullYear()} AquaGo. Built for farmers, powered by innovation.
         </p>
         <p className="mt-1 text-xs text-muted-foreground">
-          Designed by M.Nehan Chowdary, T.Akshitha, T.Manjusha
+          Designed by M.Nehan Chowdary
         </p>
       </div>
     </div>
