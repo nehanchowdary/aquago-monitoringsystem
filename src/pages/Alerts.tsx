@@ -76,6 +76,7 @@ const AlertsPage = () => {
               <tr className="border-b bg-secondary/50">
                 <th className="px-5 py-3 text-left font-semibold text-muted-foreground">Alert</th>
                 <th className="px-5 py-3 text-left font-semibold text-muted-foreground">Device</th>
+                <th className="px-5 py-3 text-left font-semibold text-muted-foreground">Severity</th>
                 <th className="px-5 py-3 text-left font-semibold text-muted-foreground">Time</th>
                 <th className="px-5 py-3 text-left font-semibold text-muted-foreground">Status</th>
                 <th className="px-5 py-3 text-left font-semibold text-muted-foreground">Action</th>
@@ -101,6 +102,13 @@ const AlertsPage = () => {
                       </div>
                     </td>
                     <td className="px-5 py-4 text-muted-foreground">{alert.device}</td>
+                    <td className="px-5 py-4">
+                      <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-bold capitalize ${
+                        alert.severity === "critical" ? "bg-destructive/10 text-destructive" : "bg-warning/10 text-warning"
+                      }`}>
+                        {alert.severity}
+                      </span>
+                    </td>
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-1.5 text-muted-foreground">
                         <Clock className="h-3 w-3" />

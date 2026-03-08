@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -58,9 +59,9 @@ const systemSteps = [
   { icon: Monitor, title: "AquaGo Dashboard", desc: "Beautiful real-time visualization and control", color: "text-accent", bg: "bg-accent/10" },
 ];
 
-const HomePage = () => {
+const HomePage = forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <div>
+    <div ref={ref}>
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[90vh] flex items-center bg-gradient-hero">
         {/* Animated water particles */}
@@ -121,12 +122,12 @@ const HomePage = () => {
               >
                 Open Dashboard <ArrowRight className="h-4 w-4" />
               </Link>
-              <a
-                href="#features"
+              <Link
+                to="/architecture"
                 className="inline-flex items-center gap-2 rounded-xl border border-primary-foreground/30 px-7 py-3.5 text-base font-semibold text-primary-foreground backdrop-blur-sm transition-all hover:bg-primary-foreground/10"
               >
-                View Live Demo <ChevronDown className="h-4 w-4" />
-              </a>
+                View System Architecture <ChevronDown className="h-4 w-4" />
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -309,6 +310,8 @@ const HomePage = () => {
       </section>
     </div>
   );
-};
+});
+
+HomePage.displayName = "HomePage";
 
 export default HomePage;
