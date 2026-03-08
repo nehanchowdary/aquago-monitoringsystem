@@ -103,6 +103,13 @@ const AlertsPage = () => {
                     </td>
                     <td className="px-5 py-4 text-muted-foreground">{alert.device}</td>
                     <td className="px-5 py-4">
+                      <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-bold capitalize ${
+                        alert.severity === "critical" ? "bg-destructive/10 text-destructive" : "bg-warning/10 text-warning"
+                      }`}>
+                        {alert.severity}
+                      </span>
+                    </td>
+                    <td className="px-5 py-4">
                       <div className="flex items-center gap-1.5 text-muted-foreground">
                         <Clock className="h-3 w-3" />
                         {alert.time.toLocaleTimeString()}

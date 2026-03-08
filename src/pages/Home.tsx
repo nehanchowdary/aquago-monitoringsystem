@@ -122,12 +122,12 @@ const HomePage = forwardRef<HTMLDivElement>((_, ref) => {
               >
                 Open Dashboard <ArrowRight className="h-4 w-4" />
               </Link>
-              <a
-                href="#features"
+              <Link
+                to="/architecture"
                 className="inline-flex items-center gap-2 rounded-xl border border-primary-foreground/30 px-7 py-3.5 text-base font-semibold text-primary-foreground backdrop-blur-sm transition-all hover:bg-primary-foreground/10"
               >
-                View Live Demo <ChevronDown className="h-4 w-4" />
-              </a>
+                View System Architecture <ChevronDown className="h-4 w-4" />
+              </Link>
             </div>
           </motion.div>
         </div>
