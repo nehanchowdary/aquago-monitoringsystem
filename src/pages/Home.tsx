@@ -310,8 +310,6 @@ const HomePage = () => {
       </section>
     </div>
   );
-});
-
-HomePage.displayName = "HomePage";
+};
 
 export default HomePage;
