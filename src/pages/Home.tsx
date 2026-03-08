@@ -310,7 +310,7 @@ const HomePage = forwardRef<HTMLDivElement>((_, ref) => {
       </section>
     </div>
   );
-};
+});
 
 HomePage.displayName = "HomePage";
 
