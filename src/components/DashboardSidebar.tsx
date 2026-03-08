@@ -38,7 +38,7 @@ const mainItems = [
   { title: "Settings", url: "/settings", icon: Settings },
 ];
 
-export const DashboardSidebar = forwardRef<HTMLDivElement>((_, ref) => {
+export const DashboardSidebar = forwardRef<HTMLDivElement>((_, _ref) => {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const location = useLocation();
@@ -47,7 +47,7 @@ export const DashboardSidebar = forwardRef<HTMLDivElement>((_, ref) => {
   const activeAlertCount = alerts.filter(a => a.status === "active").length;
 
   return (
-    <Sidebar ref={ref} collapsible="icon" className="border-r">
+    <Sidebar collapsible="icon" className="border-r">
       <SidebarContent>
         {/* Logo */}
         <div className={`flex items-center gap-2.5 px-4 py-4 ${collapsed ? "justify-center" : ""}`}>
