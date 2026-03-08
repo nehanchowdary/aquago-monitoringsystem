@@ -313,4 +313,6 @@ const HomePage = forwardRef<HTMLDivElement>((_, ref) => {
   );
 };
 
+HomePage.displayName = "HomePage";
+
 export default HomePage;
