@@ -62,7 +62,6 @@ const systemSteps = [
 const HomePage = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <div ref={ref}>
-    <div>
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[90vh] flex items-center bg-gradient-hero">
         {/* Animated water particles */}
