@@ -76,6 +76,7 @@ const AlertsPage = () => {
               <tr className="border-b bg-secondary/50">
                 <th className="px-5 py-3 text-left font-semibold text-muted-foreground">Alert</th>
                 <th className="px-5 py-3 text-left font-semibold text-muted-foreground">Device</th>
+                <th className="px-5 py-3 text-left font-semibold text-muted-foreground">Severity</th>
                 <th className="px-5 py-3 text-left font-semibold text-muted-foreground">Time</th>
                 <th className="px-5 py-3 text-left font-semibold text-muted-foreground">Status</th>
                 <th className="px-5 py-3 text-left font-semibold text-muted-foreground">Action</th>
