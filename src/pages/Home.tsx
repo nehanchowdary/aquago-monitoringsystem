@@ -58,8 +58,9 @@ const systemSteps = [
   { icon: Monitor, title: "AquaGo Dashboard", desc: "Beautiful real-time visualization and control", color: "text-accent", bg: "bg-accent/10" },
 ];
 
-const HomePage = () => {
+const HomePage = forwardRef<HTMLDivElement>((_, ref) => {
   return (
+    <div ref={ref}>
     <div>
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[90vh] flex items-center bg-gradient-hero">
