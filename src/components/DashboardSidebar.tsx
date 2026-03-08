@@ -4,9 +4,11 @@ import {
   BarChart3,
   Bell,
   Settings,
-  LogOut,
   Home,
   Droplets,
+  Zap,
+  Server,
+  BookOpen,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
@@ -28,6 +30,9 @@ const mainItems = [
   { title: "Devices", url: "/devices", icon: Cpu },
   { title: "Analytics", url: "/analytics", icon: BarChart3 },
   { title: "Alerts", url: "/alerts", icon: Bell },
+  { title: "Automation", url: "/automation", icon: Zap },
+  { title: "Architecture", url: "/architecture", icon: Server },
+  { title: "Documentation", url: "/documentation", icon: BookOpen },
   { title: "Settings", url: "/settings", icon: Settings },
 ];
 

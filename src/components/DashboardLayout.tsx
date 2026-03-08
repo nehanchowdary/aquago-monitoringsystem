@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "./DashboardSidebar";
 import { Droplets } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const DashboardLayout = () => (
   <SidebarProvider>
@@ -14,7 +15,8 @@ const DashboardLayout = () => (
             <Droplets className="h-4 w-4 text-primary" />
             <span className="text-sm font-bold text-foreground">AquaGo Monitor</span>
           </div>
-          <div className="ml-auto flex items-center gap-2">
+          <div className="ml-auto flex items-center gap-3">
+            <ThemeToggle />
             <span className="h-2 w-2 rounded-full bg-safe animate-pulse-glow glow-dot" />
             <span className="text-xs text-muted-foreground">System Online</span>
           </div>

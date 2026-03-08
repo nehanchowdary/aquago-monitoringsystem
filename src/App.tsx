@@ -11,6 +11,9 @@ import Devices from "./pages/Devices";
 import Alerts from "./pages/Alerts";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
+import Automation from "./pages/Automation";
+import Architecture from "./pages/Architecture";
+import Documentation from "./pages/Documentation";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
@@ -34,6 +37,9 @@ const App = () => (
             <Route path="/devices" element={<Devices />} />
             <Route path="/alerts" element={<Alerts />} />
             <Route path="/analytics" element={<Analytics />} />
+            <Route path="/automation" element={<Automation />} />
+            <Route path="/architecture" element={<Architecture />} />
+            <Route path="/documentation" element={<Documentation />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
           <Route path="*" element={<NotFound />} />
