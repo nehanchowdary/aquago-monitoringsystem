@@ -1,4 +1,3 @@
-import { forwardRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -59,9 +58,9 @@ const systemSteps = [
   { icon: Monitor, title: "AquaGo Dashboard", desc: "Beautiful real-time visualization and control", color: "text-accent", bg: "bg-accent/10" },
 ];
 
-const HomePage = forwardRef<HTMLDivElement>((_, ref) => {
+const HomePage = () => {
   return (
-    <div ref={ref}>
+    <div>
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[90vh] flex items-center bg-gradient-hero">
         {/* Animated water particles */}
@@ -310,8 +309,6 @@ const HomePage = forwardRef<HTMLDivElement>((_, ref) => {
       </section>
     </div>
   );
-});
-
-HomePage.displayName = "HomePage";
+};
 
 export default HomePage;
