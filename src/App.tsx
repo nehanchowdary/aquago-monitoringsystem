@@ -4,10 +4,13 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
+import DashboardLayout from "./components/DashboardLayout";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import Devices from "./pages/Devices";
 import Alerts from "./pages/Alerts";
 import Analytics from "./pages/Analytics";
+import Settings from "./pages/Settings";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
@@ -20,12 +23,18 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          {/* Public pages with top navbar */}
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+          </Route>
+          {/* Dashboard pages with sidebar */}
+          <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/devices" element={<Devices />} />
             <Route path="/alerts" element={<Alerts />} />
             <Route path="/analytics" element={<Analytics />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/settings" element={<Settings />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
