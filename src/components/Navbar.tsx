@@ -2,12 +2,11 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Droplets, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { to: "/", label: "Home" },
   { to: "/dashboard", label: "Dashboard" },
-  { to: "/alerts", label: "Alerts" },
-  { to: "/analytics", label: "Analytics" },
   { to: "/about", label: "About" },
 ];
 
@@ -44,6 +43,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle />
           <Link
             to="/dashboard"
             className="rounded-lg bg-accent px-4 py-2 text-sm font-bold text-accent-foreground shadow-sm transition-all hover:scale-105"

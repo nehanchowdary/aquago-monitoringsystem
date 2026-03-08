@@ -5,19 +5,23 @@ import {
   Thermometer,
   Activity,
   RefreshCw,
-  Lightbulb,
   Gauge,
   Waves,
   Power,
   PowerOff,
   Clock,
-  Wifi,
   Battery,
   Signal,
+  Bell,
+  Heart,
+  Brain,
+  TrendingUp,
+  Zap,
 } from "lucide-react";
 import { useIoTSimulation } from "@/hooks/useIoTSimulation";
 import TankVisualization from "@/components/TankVisualization";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 
 const CountUp = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
   const [display, setDisplay] = useState(value);
@@ -43,8 +47,10 @@ const CountUp = ({ value, suffix = "" }: { value: number; suffix?: string }) => 
 };
 
 const Dashboard = () => {
-  const { devices, tank, pump, lastUpdated, togglePump } = useIoTSimulation();
+  const { devices, tank, pump, alerts, lastUpdated, togglePump } = useIoTSimulation();
   const mainDevice = devices[0];
+  const activeAlerts = alerts.filter(a => a.status === "active").length;
+  const [autoMode, setAutoMode] = useState(false);
 
   const [pulse, setPulse] = useState(false);
   useEffect(() => {
@@ -52,6 +58,20 @@ const Dashboard = () => {
     const t = setTimeout(() => setPulse(false), 600);
     return () => clearTimeout(t);
   }, [lastUpdated]);
+
+  // Auto-pump logic
+  useEffect(() => {
+    if (!autoMode) return;
+    if (tank.level < 20 && !pump.isOn) togglePump();
+    if (tank.level >= 95 && pump.isOn) togglePump();
+  }, [autoMode, tank.level, pump.isOn, togglePump]);
+
+  // Simulated AI predictions
+  const predictions = {
+    usageTomorrow: Math.round(450 + Math.random() * 200),
+    refillTime: `${Math.round(2 + Math.random() * 4)}h ${Math.round(Math.random() * 59)}m`,
+    trend: Math.random() > 0.5 ? "increasing" : "decreasing",
+  };
 
   return (
     <div className="p-4 md:p-6 lg:p-8 space-y-6">
@@ -71,12 +91,13 @@ const Dashboard = () => {
       </div>
 
       {/* Top Stats */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {[
           { icon: Gauge, label: "Tank Level", value: `${Math.round(tank.level)}%`, color: tank.status === "critical" ? "text-destructive" : tank.status === "low" ? "text-warning" : "text-safe", bg: tank.status === "critical" ? "bg-destructive/10" : tank.status === "low" ? "bg-warning/10" : "bg-safe/10" },
           { icon: Waves, label: "Water Volume", value: `${tank.volume.toLocaleString()}L`, color: "text-primary", bg: "bg-primary/10" },
           { icon: pump.isOn ? Power : PowerOff, label: "Pump Status", value: pump.isOn ? "ON" : "OFF", color: pump.isOn ? "text-safe" : "text-muted-foreground", bg: pump.isOn ? "bg-safe/10" : "bg-muted" },
-          { icon: Clock, label: "Last Updated", value: lastUpdated.toLocaleTimeString(), color: "text-accent", bg: "bg-accent/10" },
+          { icon: Bell, label: "Active Alerts", value: `${activeAlerts}`, color: activeAlerts > 0 ? "text-warning" : "text-safe", bg: activeAlerts > 0 ? "bg-warning/10" : "bg-safe/10" },
+          { icon: Heart, label: "System Health", value: "98%", color: "text-safe", bg: "bg-safe/10" },
         ].map((stat, i) => (
           <motion.div key={stat.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
             className="rounded-2xl border bg-card p-5 card-glow">
@@ -116,9 +137,14 @@ const Dashboard = () => {
               {pump.isOn ? "RUNNING" : "STOPPED"}
             </p>
             <div className="flex gap-2">
-              <Button onClick={togglePump} variant={pump.isOn ? "destructive" : "default"} className="rounded-xl">
+              <Button onClick={togglePump} variant={pump.isOn ? "destructive" : "default"} className="rounded-xl" disabled={autoMode}>
                 {pump.isOn ? "Turn OFF" : "Turn ON"}
               </Button>
+            </div>
+            <div className="flex items-center gap-2 rounded-xl bg-secondary/50 px-4 py-2 border border-border/50">
+              <Zap className="h-3.5 w-3.5 text-accent" />
+              <span className="text-xs font-semibold text-foreground">Auto Mode</span>
+              <Switch checked={autoMode} onCheckedChange={setAutoMode} />
             </div>
             <div className="text-xs text-muted-foreground text-center space-y-1">
               <p>Runtime today: <span className="font-semibold text-foreground">{Math.round(pump.runtime)} min</span></p>
@@ -170,10 +196,48 @@ const Dashboard = () => {
                   <p className="text-lg font-extrabold text-foreground">{Math.round(mainDevice.batteryLevel)}%</p>
                 </div>
               </div>
+              <div className="rounded-xl bg-secondary/50 p-3 border border-border/50">
+                <p className="text-xs text-muted-foreground mb-1">Last Updated</p>
+                <p className="text-sm font-bold text-foreground flex items-center gap-1">
+                  <Clock className="h-3 w-3" /> {lastUpdated.toLocaleTimeString()}
+                </p>
+              </div>
             </div>
           )}
         </motion.div>
       </div>
+
+      {/* AI Prediction Panel */}
+      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="rounded-2xl border bg-card p-6 card-glow">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10">
+            <Brain className="h-5 w-5 text-accent" />
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-foreground">AI Water Consumption Prediction</h3>
+            <p className="text-xs text-muted-foreground">ML-based forecasting from historical patterns</p>
+          </div>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="rounded-xl bg-secondary/50 p-4 border border-border/50 text-center">
+            <Waves className="h-5 w-5 text-primary mx-auto mb-2" />
+            <p className="text-xs text-muted-foreground mb-1">Expected Usage Tomorrow</p>
+            <p className="text-xl font-extrabold text-foreground">{predictions.usageTomorrow}L</p>
+          </div>
+          <div className="rounded-xl bg-secondary/50 p-4 border border-border/50 text-center">
+            <Clock className="h-5 w-5 text-accent mx-auto mb-2" />
+            <p className="text-xs text-muted-foreground mb-1">Estimated Refill Time</p>
+            <p className="text-xl font-extrabold text-foreground">{predictions.refillTime}</p>
+          </div>
+          <div className="rounded-xl bg-secondary/50 p-4 border border-border/50 text-center">
+            <TrendingUp className="h-5 w-5 text-safe mx-auto mb-2" />
+            <p className="text-xs text-muted-foreground mb-1">Consumption Trend</p>
+            <p className={`text-xl font-extrabold capitalize ${predictions.trend === "increasing" ? "text-warning" : "text-safe"}`}>
+              {predictions.trend}
+            </p>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 };
